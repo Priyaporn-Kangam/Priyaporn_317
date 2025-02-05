@@ -1,6 +1,6 @@
-
 import 'package:flutter/material.dart';
-import 'page_answer/answer_portal.dart';
+import 'package:http/http.dart' as http;
+import 'package:my_app/air_quality_index/Api.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: AnswerPortal(),
+      home: AQIPage(),
     );
   }
 }

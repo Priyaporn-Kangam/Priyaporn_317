@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Answer2 extends StatelessWidget {
-  const Answer2({Key? key}) : super(key: key);
+  const Answer2({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -30,16 +30,16 @@ class Answer2 extends StatelessWidget {
                   Container(
                     width: 50,
                     height: 50,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: Colors.blue,
                       shape: BoxShape.circle,
                     ),
                   ),
                   const SizedBox(width: 10),
                   // ชื่อผู้ใช้งานและเวลาโพสต์
-                  Column(
+                  const Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
+                    children: [
                       Text(
                         'User Name',
                         style: TextStyle(fontWeight: FontWeight.bold),

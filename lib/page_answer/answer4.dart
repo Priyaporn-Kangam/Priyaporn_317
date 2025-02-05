@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 class Answer4 extends StatelessWidget {
-  const Answer4({Key? key}) : super(key: key);
+  const Answer4({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Profile Page"),
+        title: const Text("Profile Page"),
         backgroundColor: Colors.orange,
         centerTitle: true,
       ),
@@ -16,8 +16,8 @@ class Answer4 extends StatelessWidget {
           Container(
             color: Colors.blue,
             width: double.infinity,
-            padding: EdgeInsets.all(20),
-            child: Column(
+            padding: const EdgeInsets.all(20),
+            child: const Column(
               children: [
                 CircleAvatar(
                   radius: 40,
@@ -29,9 +29,9 @@ class Answer4 extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           // Profile Info Section
-          Padding(
+          const Padding(
             padding: EdgeInsets.symmetric(horizontal: 20),
             child: Column(
               children: [
@@ -62,20 +62,20 @@ class Answer4 extends StatelessWidget {
             ),
           ),
           // Add Spacer to push buttons to the bottom
-          Spacer(),
+          const Spacer(),
           // Buttons Section (at the bottom)
           Padding(
-            padding: EdgeInsets.all(20),
+            padding: const EdgeInsets.all(20),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 ElevatedButton(
                   onPressed: () {},
-                  child: Text("Edit Profile"),
+                  child: const Text("Edit Profile"),
                 ),
                 ElevatedButton(
                   onPressed: () {},
-                  child: Text("Logout"),
+                  child: const Text("Logout"),
                 ),
               ],
             ),

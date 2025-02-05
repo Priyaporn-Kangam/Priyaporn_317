@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Answer3 extends StatelessWidget {
-  const Answer3({Key? key}) : super(key: key);
+  const Answer3({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class Answer3 extends StatelessWidget {
 }
 
 class ProductPage extends StatelessWidget {
-  const ProductPage({Key? key}) : super(key: key);
+  const ProductPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -95,11 +95,11 @@ class ProductDetail extends StatelessWidget {
   final String price;
 
   const ProductDetail({
-    Key? key,
+    super.key,
     required this.imgPath,
     required this.name,
     required this.price,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
