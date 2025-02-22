@@ -41,6 +41,68 @@ class _ProductListScreenState extends State<ProductListScreen> {
     });
   }
 
+  void editProduct(int id, String name, String description, double price) {
+    setState(() {
+      final index = products.indexWhere((product) => product['id'] == id);
+      if (index != -1) {
+        products[index] = {
+          'id': id,
+          'name': name,
+          'description': description,
+          'price': price,
+        };
+      }
+    });
+  }
+
+  void showProductDialog({int? id, String? name, String? description, double? price}) {
+    TextEditingController nameController = TextEditingController(text: name);
+    TextEditingController descriptionController = TextEditingController(text: description);
+    TextEditingController priceController = TextEditingController(text: price?.toString());
+    
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(id == null ? 'เพิ่มสินค้าใหม่' : 'แก้ไขสินค้า'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextField(controller: nameController, decoration: InputDecoration(labelText: 'ชื่อสินค้า')),
+              TextField(controller: descriptionController, decoration: InputDecoration(labelText: 'รายละเอียด')),
+              TextField(controller: priceController, decoration: InputDecoration(labelText: 'ราคา'), keyboardType: TextInputType.number),
+            ],
+          ),
+          actions: [
+            TextButton(child: Text('ยกเลิก'), onPressed: () => Navigator.pop(context)),
+            TextButton(
+              child: Text(id == null ? 'เพิ่ม' : 'บันทึก'),
+              onPressed: () {
+                if (nameController.text.isNotEmpty && descriptionController.text.isNotEmpty && priceController.text.isNotEmpty) {
+                  if (id == null) {
+                    addProduct(
+                      nameController.text,
+                      descriptionController.text,
+                      double.parse(priceController.text),
+                    );
+                  } else {
+                    editProduct(
+                      id,
+                      nameController.text,
+                      descriptionController.text,
+                      double.parse(priceController.text),
+                    );
+                  }
+                  Navigator.pop(context);
+                }
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,6 +122,15 @@ class _ProductListScreenState extends State<ProductListScreen> {
                   style: TextStyle(color: Colors.green),
                 ),
                 IconButton(
+                  icon: Icon(Icons.edit, color: Colors.blue),
+                  onPressed: () => showProductDialog(
+                    id: product['id'],
+                    name: product['name'],
+                    description: product['description'],
+                    price: product['price'],
+                  ),
+                ),
+                IconButton(
                   icon: Icon(Icons.delete, color: Colors.red),
                   onPressed: () => deleteProduct(product['id']),
                 ),
@@ -69,39 +140,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => showDialog(
-          context: context,
-          builder: (context) {
-            TextEditingController nameController = TextEditingController();
-            TextEditingController descriptionController = TextEditingController();
-            TextEditingController priceController = TextEditingController();
-            return AlertDialog(
-              title: Text('เพิ่มสินค้าใหม่'),
-              content: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  TextField(controller: nameController, decoration: InputDecoration(labelText: 'ชื่อสินค้า')),
-                  TextField(controller: descriptionController, decoration: InputDecoration(labelText: 'รายละเอียด')),
-                  TextField(controller: priceController, decoration: InputDecoration(labelText: 'ราคา'), keyboardType: TextInputType.number),
-                ],
-              ),
-              actions: [
-                TextButton(child: Text('ยกเลิก'), onPressed: () => Navigator.pop(context)),
-                TextButton(
-                  child: Text('เพิ่ม'),
-                  onPressed: () {
-                    addProduct(
-                      nameController.text,
-                      descriptionController.text,
-                      double.parse(priceController.text),
-                    );
-                    Navigator.pop(context);
-                  },
-                ),
-              ],
-            );
-          },
-        ),
+        onPressed: () => showProductDialog(),
         child: Icon(Icons.add),
       ),
     );
